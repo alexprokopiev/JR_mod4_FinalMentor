@@ -1,0 +1,296 @@
+openapi: 3.0.3
+info:
+  title: Swagger ToDo App - OpenAPI 3.0
+  description: |-
+    Финальный проект 4 модуля JavaRush
+    termsOfService: http://swagger.io/terms/
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080/api
+tags:
+  - name: user
+    description: Действия с пользователями
+  - name: login
+    description: Действия с авторизацией
+  - name: task
+    description: Действия с задачами
+  - name: tag
+    description: Действия с тэгами
+  - name: comment
+    description: Действия с комментариями
+paths:
+  /users:
+    post:
+      tags:
+        - user
+      summary: Create user
+      description: Created user object
+      requestBody:
+        description: JSON with User data
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '201':
+          description: Successful operation
+        '400':
+          description: Invalid data in request
+  /login:
+    post:
+      tags:
+        - login
+      summary: User login
+      description: Login user into app
+      requestBody:
+        description: JSON with Login data
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Login'
+      responses:
+        '200':
+          description: Successful operation
+        '400':
+          description: Invalid operation
+    get:
+      tags:
+        - login
+      summary: User logout
+      description: Logout user from app
+      responses:
+        '200':
+          description: Successful operation
+        '400':
+          description: Invalid operation
+  /tags:
+    post:
+      tags:
+        - tag
+      summary: Create tag
+      description: Created tag object
+      requestBody:
+        description: JSON with Tag data
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Tag'
+      responses:
+        '201':
+          description: Successful operation
+        '400':
+          description: Invalid operation
+    delete:
+      tags:
+        - tag
+      summary: Delete tags
+      description: Delete tag objects
+      parameters:
+        - name: tagId
+          in: query
+          description: Tag id for delete
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '204':
+          description: Successful operation
+        '400':
+          description: Invalid operation
+  /tags/{id}:
+    put:
+      tags:
+        - tag
+      summary: Update tag
+      description: Update tag object
+      parameters:
+        - name: id
+          in: path
+          description: Tag id for update
+          required: true
+          schema:
+            type: string
+        - name: title
+          in: query
+          description: Tag title for update
+          required: false
+          schema:
+            type: string
+        - name: color
+          in: query
+          description: Tag color for update
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+        '400':
+          description: Invalid operation
+  /tasks:
+    post:
+      tags:
+        - task
+      summary: Create task
+      description: Create task object
+      requestBody:
+        description: JSON with Task data
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Task'
+      responses:
+        '201':
+          description: Successful operation
+        '400':
+          description: Invalid operation
+    get:
+      tags:
+        - task
+      summary: Get tasks
+      description: Get list of task objects
+      parameters:
+        - name: userId
+          in: query
+          description: User ID for filter response's result
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: string
+        '400':
+          description: Invalid operation
+  /tasks/{id}:
+    put:
+      tags:
+        - task
+      summary: Update task
+      description: Update task object
+      parameters:
+        - name: id
+          in: path
+          description: Task id for update
+          required: true
+          schema:
+            type: string
+        - name: title
+          in: query
+          description: Task title for update
+          required: false
+          schema:
+            type: string
+        - name: userId
+          in: query
+          description: Task user id for update
+          required: false
+          schema:
+            type: string
+        - name: state
+          in: query
+          description: Task state for update
+          required: false
+          schema:
+            type: string
+        - name: tagId
+          in: query
+          description: Tag id for update task
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: Successful operation
+        '400':
+          description: Invalid operation
+    delete:
+      tags:
+        - task
+      summary: Delete task
+      description: Delete task object
+      parameters:
+        - name: id
+          in: path
+          description: Task id for delete
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Successful operation
+        '400':
+          description: Invalid operation
+  /comments:
+    post:
+      tags:
+        - comment
+      summary: Create comment
+      description: Create comment object
+      requestBody:
+        description: JSON with Comment data
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Comment'
+      responses:
+        '201':
+          description: Successful operation
+        '400':
+          description: Invalid operation
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        name:
+          type: string
+        role:
+          type: string
+        login:
+          type: string
+        lastName:
+          type: string
+        password:
+          type: string
+    Login:
+      type: object
+      properties:
+        login:
+          type: string
+        password:
+          type: string
+    Tag:
+      type: object
+      properties:
+        title:
+          type: string
+        color:
+          type: string
+    Task:
+      type: object
+      properties:
+        title:
+          type: string
+        userId:
+          type: string
+        tagTitles:
+          type: array
+          items:
+            type: string
+    Comment:
+      type: object
+      properties:
+        title:
+          type: string
+        userId:
+          type: string
+        comment:
+          type: string

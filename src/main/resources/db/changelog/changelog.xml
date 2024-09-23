@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.29.xsd">
+    <include file="version_1_0/TRC-1.xml" relativeToChangelogFile="true"/>
+    <include file="version_1_0/TRC-2.xml" relativeToChangelogFile="true"/>
+    <include file="version_1_0/TRC-3.xml" relativeToChangelogFile="true"/>
+    <include file="version_1_0/TRC-4.xml" relativeToChangelogFile="true"/>
+    <include file="version_1_0/TRC-5.xml" relativeToChangelogFile="true"/>
+</databaseChangeLog>
