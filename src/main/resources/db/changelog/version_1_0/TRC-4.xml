@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="TRC-4-0" author="Alex Prokopiev">
+        <createTable tableName="tasks_to_tags" schemaName="todo_app">
+            <column name="task_id" type="bigint">
+                <constraints nullable="false" foreignKeyName="fk_tasks" references="todo_app.tasks(id)"/>
+            </column>
+            <column name="tag_id" type="bigint">
+                <constraints nullable="false" foreignKeyName="fk_tags" references="todo_app.tags(id)"/>
+            </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>
